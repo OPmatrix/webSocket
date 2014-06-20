@@ -8,7 +8,7 @@
     socket = io.connect('http://ping.3g.cn:8080');
     //收到server的连接确认
     socket.on('open',function(){
-        status.text('Choose a name:');
+        status.text('input a name:');
     });
 
     //监听system事件，判断welcome或者disconnect，打印系统消息信息
@@ -23,9 +23,16 @@
         content.prepend(p); 
     });
 
-    //监听message事件，打印消息信息
-    socket.on('message',function(json){
-        var p = '<p><span style="color:'+json.color+';">' + json.author+'</span> @ '+ json.time+ ' : '+json.text+'</p>';
+    
+    socket.on('roomChat',function(json){
+        console.log(json);
+        var p = '<p> '+json+'</p>';
+        content.prepend(p);
+    });
+ 
+    socket.on('privateChat',function(json){
+        console.log(json);
+        var p = '<p> '+json+'</p>';
         content.prepend(p);
     });
 
@@ -33,12 +40,20 @@
     input.keydown(function(e) {
         if (e.keyCode === 13) {
             var msg = $(this).val();
-            if (!msg) return;
-            socket.send(msg);
             $(this).val('');
-            if (myName === false) {
-                myName = msg;
-            }
+            socket.emit('roomChat', msg);
         }
     });
+
+    $('#commit').click(function(){
+        var roomToken = "room"+ $('#inputRoomNum').val()||"1";
+        var name = $('#inputName').val();
+        msg = {
+            userId: name,
+            roomToken: roomToken
+        }
+        socket.emit("login", msg);
+        $('#commit').hide();
+        $('#send').show();
+    })
 });

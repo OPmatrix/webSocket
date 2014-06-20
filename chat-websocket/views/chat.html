@@ -9,9 +9,17 @@
     <script src="javascripts/chat.js"></script>
 </head>
 <body>
-    <h1>Socket.io - Simple chat room</h1>
-    <div>
+    <h1 id="header">Socket.io - Simple chat room</h1>
+    <div id="roomDiv">
+        <span id="roomLabel">房间号:  </span>
+        <input type="text" id="inputRoomNum"/>
+        <span id="nameLabel">用户:  </span>
+        <input type="text" id="inputName"/>
+        <button id="commit">Log in</button>
+    </div>
+    <div id="send" style="display:none">
         <span id="status">Connecting...</span>
+        
         <input type="text" id="input"/>
     </div>
     <div id="content"></div>
