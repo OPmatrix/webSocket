@@ -1,0 +1,12 @@
+{
+  "name": "connector server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node connector.js"
+  },
+  "dependencies": {
+    "socket.io": "0.9.16",
+    "async": "0.9.0"
+  }
+}

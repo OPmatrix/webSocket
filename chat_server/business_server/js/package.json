@@ -1,0 +1,11 @@
+{
+  "name": "business server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node business.js"
+  },
+  "dependencies": {
+    "socket.io": "0.9.16"
+  }
+}
